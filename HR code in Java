@@ -1,0 +1,259 @@
+ package com.jv.hotelreservation;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Hotelreservation {
+	
+	public static void main(String[] args) {	
+		
+		Scanner scan = new Scanner(System.in);
+		ArrayList<Integer> prices = new ArrayList<Integer>();
+		ArrayList<String> categories = new ArrayList<String>();
+		HashMap<String, Integer> categoryCount = new HashMap<String, Integer>();
+		double total = 0, paid;
+		int option, trans = 0;
+                
+                int prem=0;
+                int su=0;
+                double up = 0;
+                
+                double p1= 0;
+                double p2= 0;
+                double p3= 0;
+                
+                //deluxe 
+                String cmo;
+                int cto=0;
+                int cyea=0;
+                
+                String omu;
+                int oda=0;
+                int oyea=0;
+                
+                //premium
+                String pmo;
+                int pto=0;
+                int ccyea=0;
+                
+                String pmu;
+                int pda=0;
+                int pyea=0;
+                
+                //suite
+                String smu;
+                int sto=0;
+                int syea=0;
+                
+                String ssmu;
+                int sda=0;
+                int spyea=0;
+                
+                double down=0;
+               
+                
+                
+                
+                
+                int d=0;
+                
+                double change = 0;
+		String name, contact, bank, email,in,out;
+		
+		System.out.println("WELCOME TO OUR ONLINE HOTEL BOOKING SITE!");
+		
+		int choice;
+		do {
+			System.out.println("What type of room? \n1. Deluxe ($8,000.00)"
+				+ "\n2. Premiere($10,000.00)"
+				+ "\n3. Suite($12,000.00)");
+			int type = scan.nextInt();
+			System.out.println("How many rooms will you take? ");
+			int rooms = scan.nextInt();
+                        
+			
+			
+                        
+			String category;
+			if(type==1) {
+                                System.out.println("Check-In:");
+                                System.out.println("Month:");
+                                cmo = scan.next();
+                                System.out.println("Day");
+                                cto = scan.nextInt();
+                                System.out.println("Year");
+                                cyea = scan.nextInt();
+                                
+                                System.out.println("Check-Out:");
+                                System.out.println("Month:");
+                                omu = scan.next();
+                                System.out.println("Day");
+                                oda = scan.nextInt();
+                                System.out.println("Year");
+                                oyea = scan.nextInt();
+                               
+                                d= oda - cto;
+                                
+				p1 = 8000 * rooms;
+				category = "Deluxe";
+			} else if(type==2) {
+                                
+                                System.out.println("Check-In Date");
+                                System.out.println("Month:");
+                                pmo = scan.next();
+                                System.out.println("Day");
+                                pto = scan.nextInt();
+                                System.out.println("Year");
+                                ccyea = scan.nextInt();
+                                
+                                System.out.println("Check-Out Date");
+                                System.out.println("Month:");
+                                pmu = scan.next();
+                                System.out.println("Day");
+                                pda = scan.nextInt();
+                                System.out.println("Year");
+                                pyea = scan.nextInt();
+
+prem= pda- pto;
+                                
+				p2 = 10000 * rooms;
+				category = "Premiere";
+			} else {
+                                System.out.println("Check-In:");
+                                System.out.println("Month:");
+                                smu = scan.next();
+                                System.out.println("Day");
+                                sto = scan.nextInt();
+                                System.out.println("Year");
+                                syea = scan.nextInt();
+                                
+                                System.out.println("Check-Out:");
+                                System.out.println("Month:");
+                                ssmu = scan.next();
+                                System.out.println("Day");
+                                sda = scan.nextInt();
+                                System.out.println("Year");
+                                spyea = scan.nextInt();
+                                
+                                su= sda - sto;
+                                
+				p3 = 12000 * rooms;
+				category = "Suite";
+			}
+			
+			categories.add(category);
+			
+			categoryCount.put(category, categoryCount.getOrDefault(category, 0) + rooms);
+			
+			System.out.println("Do you want to add another room type? \n1. Yes\n2. No");
+			choice = scan.nextInt();
+		} while(choice == 1);
+				
+		
+		
+		
+		scan.nextLine(); // consume the new line character left by scan.nextInt()
+		
+		System.out.println("Your Name: ");
+		name = scan.nextLine();
+		
+		System.out.println("Contact Number: ");
+		contact = scan.nextLine();
+		
+		System.out.println("Email Address: ");
+		email = scan.nextLine();
+                
+
+		
+		double downpayment = ((p1 + p2 + p3)/2);
+                double alllast = p1+p2+p3;
+                double RB = alllast - downpayment;
+		
+		
+		System.out.println("Total Price to Pay: $" + alllast);
+		System.out.println("Payment Method\n"
+				+ "1. GCash\n"
+				+ "2. Credit Card");
+		int method = scan.nextInt();
+		if(method == 1) {
+			bank = "Gcash";
+		}
+		else {
+			bank = "Credit Card";
+		}
+		
+                
+
+		
+		do {
+			System.out.println("50% of the total price should be payed for the downpayment.");
+                        System.out.println("1. Downpayment\n2. Fullpayment");
+                        option = scan.nextInt();
+		
+		if (option == 1) {
+			
+			System.out.println("Downpayment is $" + downpayment);
+			System.out.println("Proceed transaction? \n1. Yes\n2. No");
+			trans = scan.nextInt();
+                        
+                        paid = downpayment;
+                        
+                        System.out.println("Enter payment Amount: ");
+			up = scan.nextDouble();
+                        if (up >= downpayment){
+                            
+                                change = up - downpayment;
+                                System.out.println("Payment Sucessfull! ");
+                                continue;
+
+                        }else
+                            System.out.println(" INVALID ");
+			
+                        
+			
+		}
+		else {
+			System.out.println("Fullpayment is $" + alllast);
+			System.out.println("Proceed transaction? \n1. Yes\n2. No");
+			trans = scan.nextInt();
+                        
+                        System.out.println("Enter payment Amount: ");
+			down = scan.nextDouble();
+                        if (down >= alllast){
+                        change = down - alllast;
+                        System.out.println("Payment Sucessfull! ");
+                        continue;
+
+                        }else
+                            System.out.println(" INVALID ");
+			
+			paid = total;
+		}
+		
+		}while(trans == 2); 
+				
+		String message = "\nRECEIPT" +
+				"\nType of Room: " + categories.toString();
+		for (String category : categoryCount.keySet()) {
+			message += "\nNumber of " + category + " Rooms: " + categoryCount.get(category);
+		}
+		message +=
+		"\nTotal Price of All Room/s: $" + alllast +
+		"\nTotal Downpayment Paid: $" + up +
+                "\nTotal Payment Paid: $" + down +
+                "\nRemaining Balance: $" + RB +      
+		"\nPayment Method: " + bank +
+		"\nName: " + name +
+		"\nContact Number: " + contact +
+		"\nEmail Address: " + email +
+                "\nTotal days of deluxe room: " + d +
+                "\nTotal days of premier room: " + prem +
+                "\nTotal days of suite room: " + su;
+                
+		System.out.println(message);
+		
+		System.out.println("THANK YOU FOR USING OUR SITE!");
+		scan.close();
+	}
+}
